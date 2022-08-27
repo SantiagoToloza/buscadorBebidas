@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import Formulario from "./components/Formulario";
 
-import { CategoriasProvider } from "../context/CategoriaProvider";
+import { CategoriasProvider } from "../src/context/CategoriaProvider";
 
 const App = () => {
   return (
