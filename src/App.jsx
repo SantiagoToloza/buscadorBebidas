@@ -3,6 +3,7 @@ import Formulario from "./components/Formulario";
 
 import { CategoriasProvider } from "../src/context/CategoriaProvider";
 import { BebidasProvider } from "./context/BebidasProvider";
+import ListadoBebidas from "./components/ListadoBebidas";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       </header>
       <Container className="mt-5">
         <Formulario></Formulario>
+        <ListadoBebidas/>
       </Container>
 
     </CategoriasProvider>
