@@ -1,22 +1,35 @@
-import {Col,Card,Button} from 'react-bootstrap'
+import { useContext } from "react";
+import { Col, Card, Button } from "react-bootstrap";
+import useBebidas from "../hooks/useBebidas";
 
+const Bebida = ({ bebida }) => {
+  const { handleModalClick, consultarInfo, setInfo } = useBebidas();
+  return (
+    <Col md={2} lg={4}>
+      <Card className="mb-4 mt-4">
+        <Card.Img
+          variant="top"
+          src={bebida.strDrinkThumb}
+          alt={`Imagen de ${bebida.strDrink}`}
+        />
 
-const Bebida = ({bebida}) => {
-  return <Col md={2} lg={4} >
-          <Card className="mb-4">
-            {bebida.strDrink}
-           <Card.Img
-           variant='top'
-           src={bebida.strDrinkThumb}
-           alt={`Imagen de ${bebida.strDrink}`}
-           />
-
-           <Card.Body>
-              <Card.Title>{bebida.strDrink} </Card.Title>
-              <Card.Text>Algo mas...</Card.Text>
-              <Button className="w-100 uppercase mt-2" variant={'warning'}>Ver Receta</Button>
-           </Card.Body>
-          </Card>
-        </Col>;
+        <Card.Body>
+          <Card.Title className="text-center">{bebida.strDrink} </Card.Title>
+          <p className="text-center">{bebida.strGlass} </p>
+          <Button
+            className="w-100 uppercase mt-2"
+            variant={"warning"}
+            onClick={() => {
+              handleModalClick();
+              consultarInfo(bebida.idDrink);
+              setInfo({});
+            }}
+          >
+            Ver Receta
+          </Button>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
 };
 export default Bebida;
