@@ -1,9 +1,10 @@
 import { Modal, Image, Card } from "react-bootstrap";
 import useBebidas from "../hooks/useBebidas";
 
+
 const ModalBebida = () => {
   const { modal, handleModalClick, info,cargando} = useBebidas();
-  const { strDrink, strInstructions, strDrinkThumb, infostrDrink,strMeasure } = info;
+  const { strDrink, strInstructions, strDrinkThumb} = info;
 
   const mostrarIngredientes = ()=>{
     let ingredientes = []
