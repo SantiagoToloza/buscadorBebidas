@@ -6,18 +6,23 @@ const BebidasProvider = ({ children }) => {
   const [bebidas, setBebidas] = useState([]);
   const [modal, setModal] = useState(false);
   const [info, setInfo] = useState([]);
+  const [cargando, setCargando] = useState(false)
   const handleModalClick = () => {
     setModal(!modal);
   };
 
   const consultarInfo = async (id) => {
+
     const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
     console.log(url);
+    setCargando(true)
     try {
       const {data} = await axios(url)
       setInfo(data.drinks[0])
     } catch (error) {
       console.log(error)
+    } finally{
+      setCargando(false)
     }
   };
 
@@ -41,7 +46,7 @@ const BebidasProvider = ({ children }) => {
         modal,
         consultarInfo,
         info,
-        setInfo
+        cargando
       }}
     >
       {children}

@@ -2,8 +2,8 @@ import { Modal, Image, Card } from "react-bootstrap";
 import useBebidas from "../hooks/useBebidas";
 
 const ModalBebida = () => {
-  const { modal, handleModalClick, info } = useBebidas();
-  const { strDrink,strIngredient, strInstructions, strDrinkThumb, infostrDrink,strMeasure } = info;
+  const { modal, handleModalClick, info,cargando} = useBebidas();
+  const { strDrink, strInstructions, strDrinkThumb, infostrDrink,strMeasure } = info;
 
   const mostrarIngredientes = ()=>{
     let ingredientes = []
@@ -18,7 +18,7 @@ const ModalBebida = () => {
   }
   return (
     <>
-      {info && (
+      {!cargando && (
         <Modal show={modal} onHide={handleModalClick}>
           <Image src={strDrinkThumb} alt={`imagen de receta ${strDrink}`} />
           <Modal.Header>
