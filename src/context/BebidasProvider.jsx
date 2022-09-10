@@ -6,23 +6,28 @@ const BebidasProvider = ({ children }) => {
   const [bebidas, setBebidas] = useState([]);
   const [modal, setModal] = useState(false);
   const [info, setInfo] = useState([]);
-  const [cargando, setCargando] = useState(false)
+  const [cargando, setCargando] = useState(false);
+  const [favoritos, setFavoritos] = useState([]);
+
   const handleModalClick = () => {
     setModal(!modal);
   };
 
-  const consultarInfo = async (id) => {
+  const guardarFavoritos = (id) => {
+      setFavoritos([...favoritos, id]);
+  };
 
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+  const consultarInfo = async (id) => {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     console.log(url);
-    setCargando(true)
+    setCargando(true);
     try {
-      const {data} = await axios(url)
-      setInfo(data.drinks[0])
+      const { data } = await axios(url);
+      setInfo(data.drinks[0]);
     } catch (error) {
-      console.log(error)
-    } finally{
-      setCargando(false)
+      console.log(error);
+    } finally {
+      setCargando(false);
     }
   };
 
@@ -46,7 +51,10 @@ const BebidasProvider = ({ children }) => {
         modal,
         consultarInfo,
         info,
-        cargando
+        cargando,
+        guardarFavoritos,
+        favoritos,
+        
       }}
     >
       {children}

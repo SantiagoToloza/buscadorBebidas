@@ -30,7 +30,7 @@ const Formulario = () => {
 
   return (
     <>
-      <Favoritos/>
+      <Favoritos />
       <Form onSubmit={enviarFormulario}>
         {alerta && (
           <Alert variant="danger" className="text-center">
