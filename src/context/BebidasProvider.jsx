@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 const BebidasContext = createContext();
 
 const BebidasProvider = ({ children }) => {
@@ -8,13 +8,41 @@ const BebidasProvider = ({ children }) => {
   const [info, setInfo] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [favoritos, setFavoritos] = useState([]);
+  const [guardarId, setGuardarId] = useState([]);
 
   const handleModalClick = () => {
     setModal(!modal);
   };
 
-  const guardarFavoritos = (id) => {
-      setFavoritos([...favoritos, id]);
+  const eliminarFavoritos = (id) => {
+    console.log("eliminado", id.idDrink);
+    const eliminado = favoritos.filter((elim) => id.idDrink != elim.id);
+    setFavoritos(eliminado);
+  };
+
+  // const guardarFavoritos = (id) => {
+  //   setGuardarId([...guardarId, id.idDrink]);
+  //   for (let i = 1; i < guardarId.length; i++) {
+  //     if (guardarId.includes(id.idDrink)) {
+  //     } else {
+  //       setGuardarId([...guardarId, id.idDrink]);
+  //       setFavoritos([...favoritos, id]);
+  //     }
+  //   }
+  // };
+
+  const guardarFavoritos = (info) => { 
+    if(guardarId.length === 0){
+      setGuardarId([...guardarId,info.idDrink])
+    }else{
+      for(let i = 0 ; i < guardarId.length; i++){
+        if(info.idDrink !== guardarId[i]){
+          setGuardarId([...guardarId,info.idDrink])
+        }else{
+          console.log('este no pasa ya esta')
+        }
+      }
+    }
   };
 
   const consultarInfo = async (id) => {
@@ -32,7 +60,7 @@ const BebidasProvider = ({ children }) => {
   };
 
   const consultarBebidas = async (datos) => {
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${datos.nombre}&c=${datos.categoria}`;
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${datos.bebida}&c=${datos.categoria}`;
     try {
       const { data } = await axios(url);
       setBebidas(data.drinks);
@@ -54,7 +82,7 @@ const BebidasProvider = ({ children }) => {
         cargando,
         guardarFavoritos,
         favoritos,
-        
+        eliminarFavoritos,
       }}
     >
       {children}

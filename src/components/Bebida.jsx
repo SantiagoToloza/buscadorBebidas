@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import useBebidas from "../hooks/useBebidas";
 
