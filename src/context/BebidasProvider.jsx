@@ -9,6 +9,7 @@ const BebidasProvider = ({ children }) => {
   const [cargando, setCargando] = useState(false);
   const [favoritos, setFavoritos] = useState([]);
   const [guardarId, setGuardarId] = useState([]);
+  const [hearth, sethearth] = useState(false);
 
   const handleModalClick = () => {
     setModal(!modal);
@@ -16,33 +17,14 @@ const BebidasProvider = ({ children }) => {
 
   const eliminarFavoritos = (id) => {
     console.log("eliminado", id.idDrink);
-    const eliminado = favoritos.filter((elim) => id.idDrink != elim.id);
+    const eliminado = favoritos.filter((elim) => id.idDrink !== elim.idDrink);
+    const eliminandoId = guardarId.filter(elimId => id.idDrink !== elimId)
     setFavoritos(eliminado);
+    setGuardarId(eliminandoId)
   };
 
-  // const guardarFavoritos = (id) => {
-  //   setGuardarId([...guardarId, id.idDrink]);
-  //   for (let i = 1; i < guardarId.length; i++) {
-  //     if (guardarId.includes(id.idDrink)) {
-  //     } else {
-  //       setGuardarId([...guardarId, id.idDrink]);
-  //       setFavoritos([...favoritos, id]);
-  //     }
-  //   }
-  // };
-
-  const guardarFavoritos = (info) => { 
-    if(guardarId.length === 0){
-      setGuardarId([...guardarId,info.idDrink])
-    }else{
-      for(let i = 0 ; i < guardarId.length; i++){
-        if(info.idDrink !== guardarId[i]){
-          setGuardarId([...guardarId,info.idDrink])
-        }else{
-          console.log('este no pasa ya esta')
-        }
-      }
-    }
+  const guardarFavoritos = (info) => {
+    !guardarId.includes(info.idDrink) ? (setGuardarId([...guardarId,info.idDrink]), setFavoritos([...favoritos,info]) ) : console.log('ese id ya esta')
   };
 
   const consultarInfo = async (id) => {
@@ -83,6 +65,7 @@ const BebidasProvider = ({ children }) => {
         guardarFavoritos,
         favoritos,
         eliminarFavoritos,
+        hearth
       }}
     >
       {children}

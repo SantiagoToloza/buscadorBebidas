@@ -6,7 +6,7 @@ const Favoritos = () => {
     useBebidas();
 
   return (
-    <Dropdown className="d-flex justify-content-end w-full ">
+    <Dropdown className="d-flex justify-content-end w-full container ">
       <Dropdown.Toggle
         variant="warning"
         id="dropdown-basic"
@@ -15,10 +15,13 @@ const Favoritos = () => {
         favoritos
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
+      <Dropdown.Menu className="row">
         {favoritos.map((favorito) => (
-          <>
-            <AiFillDelete onClick={() => eliminarFavoritos(favorito.idDrink)} />
+          <div className="row">
+              <AiFillDelete
+                onClick={() => eliminarFavoritos(favorito)}
+                className="col"
+              />
             <Dropdown.Item
               href="#/action-1"
               key={favorito.idDrink}
@@ -26,11 +29,11 @@ const Favoritos = () => {
                 handleModalClick();
                 consultarInfo(favorito.idDrink);
               }}
+              className="col"
             >
-              {" "}
               {favorito.strDrink}{" "}
             </Dropdown.Item>
-          </>
+          </div>
         ))}
       </Dropdown.Menu>
     </Dropdown>
