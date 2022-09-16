@@ -20,7 +20,7 @@ const Favoritos = () => {
           <div className="row">
               <AiFillDelete
                 onClick={() => eliminarFavoritos(favorito)}
-                className="col"
+                className="col w-1/2 mt-2 text-danger"
               />
             <Dropdown.Item
               href="#/action-1"
@@ -29,7 +29,7 @@ const Favoritos = () => {
                 handleModalClick();
                 consultarInfo(favorito.idDrink);
               }}
-              className="col"
+              className="col w-1/2 "
             >
               {favorito.strDrink}{" "}
             </Dropdown.Item>
