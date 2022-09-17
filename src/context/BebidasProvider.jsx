@@ -24,7 +24,7 @@ const BebidasProvider = ({ children }) => {
   };
 
   const guardarFavoritos = (info) => {
-    !guardarId.includes(info.idDrink) ? (setGuardarId([...guardarId,info.idDrink]), setFavoritos([...favoritos,info]) ) : console.log('ese id ya esta')
+    !guardarId.includes(info.idDrink) && (setGuardarId([...guardarId,info.idDrink]), setFavoritos([...favoritos,info]) ) 
   };
 
   const consultarInfo = async (id) => {
@@ -65,7 +65,7 @@ const BebidasProvider = ({ children }) => {
         guardarFavoritos,
         favoritos,
         eliminarFavoritos,
-        hearth
+        guardarId
       }}
     >
       {children}
