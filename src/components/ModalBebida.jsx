@@ -1,11 +1,12 @@
 import { Modal, Image, Card } from "react-bootstrap";
 import useBebidas from "../hooks/useBebidas";
-import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { MdOutlineFavoriteBorder, MdOutlineFavorite,MdClose } from "react-icons/md";
 import { useState, useEffect } from "react";
 
 const ModalBebida = () => {
   const {
     modal,
+    setModal,
     handleModalClick,
     info,
     cargando,
@@ -45,7 +46,9 @@ const ModalBebida = () => {
     <>
       {!cargando && (
         <Modal show={modal} onHide={handleModalClick}>
+          <MdClose className="sm position-none position-absolute w-full start-0 text-light fs-1 m-3" onClick={()=> setModal(!modal)} />
           <div className="position-absolute w-full end-0">
+
             {checkHearth == true ? (
               <MdOutlineFavorite className="fs-1 m-3 text-danger" onClick={()=>eliminarFavoritos(info)}/>
               ) : (

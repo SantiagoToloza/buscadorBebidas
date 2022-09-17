@@ -9,7 +9,6 @@ const BebidasProvider = ({ children }) => {
   const [cargando, setCargando] = useState(false);
   const [favoritos, setFavoritos] = useState([]);
   const [guardarId, setGuardarId] = useState([]);
-  const [hearth, sethearth] = useState(false);
 
   const handleModalClick = () => {
     setModal(!modal);
@@ -28,6 +27,7 @@ const BebidasProvider = ({ children }) => {
   };
 
   const consultarInfo = async (id) => {
+    setInfo([])
     const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     console.log(url);
     setCargando(true);
@@ -59,6 +59,7 @@ const BebidasProvider = ({ children }) => {
         bebidas,
         handleModalClick,
         modal,
+        setModal,
         consultarInfo,
         info,
         cargando,
